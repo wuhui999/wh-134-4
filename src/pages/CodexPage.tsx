@@ -8,15 +8,15 @@ export default function CodexPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen wetland-bg paper-texture flex flex-col">
+    <div className="min-h-screen bg-wetland-deep wetland-bg paper-texture flex flex-col">
       <div className="sticky top-0 z-20 bg-wetland-deep/90 backdrop-blur-md border-b border-white/10 px-4 py-3">
         <div className="max-w-4xl mx-auto flex items-center gap-3">
-          <button onClick={() => navigate(-1)} className="text-white/80 hover:text-white transition-colors">
+          <button onClick={() => navigate(-1)} className="text-white hover:text-wetland-sand transition-colors">
             <ArrowLeft className="w-5 h-5" />
           </button>
           <BookOpen className="w-5 h-5 text-wetland-sand" />
           <h2 className="font-display text-lg text-white font-bold">鸟类图鉴</h2>
-          <span className="text-white/65 text-sm ml-auto">{unlockedBirds.length}/{BIRDS.length} 已解锁</span>
+          <span className="text-white/80 text-sm ml-auto font-medium">{unlockedBirds.length}/{BIRDS.length} 已解锁</span>
         </div>
       </div>
 
@@ -37,7 +37,7 @@ export default function CodexPage() {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <h3 className={`font-display text-lg font-bold ${isUnlocked ? 'text-white' : 'text-white/65'}`}>
+                      <h3 className={`font-display text-lg font-bold ${isUnlocked ? 'text-white' : 'text-white/80'}`}>
                         {isUnlocked ? bird.name : '???'}
                       </h3>
                       <span className={`text-xs px-2 py-0.5 rounded-full ${
@@ -50,15 +50,15 @@ export default function CodexPage() {
                     </div>
                     {isUnlocked ? (
                       <>
-                        <p className="text-white/65 text-xs italic mb-1">{bird.scientificName}</p>
-                        <p className="text-white/80 text-sm mb-2">{bird.description}</p>
+                        <p className="text-white/70 text-xs italic mb-1 font-medium">{bird.scientificName}</p>
+                        <p className="text-white/90 text-sm mb-2">{bird.description}</p>
                         <div className="space-y-1 text-xs">
-                          <p className="text-white/70">🏠 {bird.habitat}</p>
-                          <p className="text-white/70">🎯 {bird.behavior}</p>
-                          <p className="text-white/70">📏 {bird.size}</p>
+                          <p className="text-white/80">🏠 {bird.habitat}</p>
+                          <p className="text-white/80">🎯 {bird.behavior}</p>
+                          <p className="text-white/80">📏 {bird.size}</p>
                         </div>
                         <div className="mt-3 flex items-center gap-2">
-                          <span className="text-white/65 text-xs">环志：</span>
+                          <span className="text-white/75 text-xs font-medium">环志：</span>
                           {bird.bandColors.map((c, i) => (
                             <div key={i} className="band-ring-sm" style={{ backgroundColor: BAND_COLOR_HEX[c] }}>
                               {c}
@@ -71,8 +71,8 @@ export default function CodexPage() {
                       </>
                     ) : (
                       <div className="flex items-center gap-2 mt-2">
-                        <Lock className="w-4 h-4 text-white/50" />
-                        <p className="text-white/50 text-sm">识别此鸟种后解锁</p>
+                        <Lock className="w-4 h-4 text-white/65" />
+                        <p className="text-white/65 text-sm">识别此鸟种后解锁</p>
                       </div>
                     )}
                   </div>
@@ -111,25 +111,25 @@ export default function CodexPage() {
         <div className="card-game p-5">
           <h3 className="font-display text-lg text-white font-bold mb-3">📋 观测站等级说明</h3>
           <div className="space-y-3">
-            <div className="flex items-center gap-3 bg-wetland-dark/40 rounded-lg p-3">
+            <div className="flex items-center gap-3 bg-wetland-dark/60 rounded-lg p-3">
               <div className="w-8 h-8 rounded-lg bg-wetland-sky/25 flex items-center justify-center text-wetland-sky font-bold text-sm">1</div>
               <div>
                 <p className="text-white text-sm font-semibold">基础观测点</p>
-                <p className="text-white/65 text-xs">线索完整度 50%，可见部分环志颜色</p>
+                <p className="text-white/75 text-xs">线索完整度 50%，可见部分环志颜色</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 bg-wetland-dark/40 rounded-lg p-3">
+            <div className="flex items-center gap-3 bg-wetland-dark/60 rounded-lg p-3">
               <div className="w-8 h-8 rounded-lg bg-wetland-reed/25 flex items-center justify-center text-wetland-reed font-bold text-sm">2</div>
               <div>
                 <p className="text-white text-sm font-semibold">进阶观测点</p>
-                <p className="text-white/65 text-xs">线索完整度 75%，可见更多环志颜色</p>
+                <p className="text-white/75 text-xs">线索完整度 75%，可见更多环志颜色</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 bg-wetland-dark/40 rounded-lg p-3">
+            <div className="flex items-center gap-3 bg-wetland-dark/60 rounded-lg p-3">
               <div className="w-8 h-8 rounded-lg bg-wetland-dusk/25 flex items-center justify-center text-wetland-dusk font-bold text-sm">3</div>
               <div>
                 <p className="text-white text-sm font-semibold">高级观测点</p>
-                <p className="text-white/65 text-xs">线索完整度 100%，可见全部环志颜色</p>
+                <p className="text-white/75 text-xs">线索完整度 100%，可见全部环志颜色</p>
               </div>
             </div>
           </div>

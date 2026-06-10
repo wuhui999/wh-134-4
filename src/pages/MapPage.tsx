@@ -27,7 +27,7 @@ export default function MapPage() {
   };
 
   return (
-    <div className="min-h-screen wetland-bg paper-texture flex flex-col">
+    <div className="min-h-screen bg-wetland-deep wetland-bg paper-texture flex flex-col">
       <div className="sticky top-0 z-20 bg-wetland-deep/90 backdrop-blur-md border-b border-white/10 px-4 py-3">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4 text-white text-sm">
@@ -46,7 +46,7 @@ export default function MapPage() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => { goToPhase('codex'); navigate('/codex'); }}
-              className="text-white/80 hover:text-white transition-colors text-sm flex items-center gap-1"
+              className="text-white hover:text-wetland-sand transition-colors text-sm flex items-center gap-1 font-medium"
             >
               <BookOpen className="w-4 h-4" />
               图鉴({unlockedBirds.length})
@@ -58,7 +58,7 @@ export default function MapPage() {
       <div className="flex-1 max-w-4xl mx-auto w-full p-4 md:p-6">
         <div className="mb-6">
           <h2 className="font-display text-2xl text-white font-bold mb-1">湿地观测站</h2>
-          <p className="text-white/75 text-sm">布置和升级观测点以获取更完整的鸟类线索</p>
+          <p className="text-white text-sm font-medium">布置和升级观测点以获取更完整的鸟类线索</p>
         </div>
 
         <div className="relative card-game p-4 mb-6">
@@ -113,12 +113,12 @@ export default function MapPage() {
             return (
               <div key={p.id} className={`card-game p-3 flex items-center justify-between ${p.placed ? 'border-wetland-sky/30' : 'border-white/5'}`}>
                 <div className="flex items-center gap-3">
-                  <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${p.placed ? 'bg-wetland-sky/25 text-wetland-sky' : 'bg-white/10 text-white/50'}`}>
+                  <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${p.placed ? 'bg-wetland-sky/25 text-wetland-sky' : 'bg-white/15 text-white/65'}`}>
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className={`text-sm font-semibold ${p.placed ? 'text-white' : 'text-white/60'}`}>{slot.name}</p>
-                    <p className="text-xs text-white/65">
+                    <p className={`text-sm font-semibold ${p.placed ? 'text-white' : 'text-white/80'}`}>{slot.name}</p>
+                    <p className="text-xs text-white/75">
                       {p.placed ? `等级 ${p.level} · 线索完整度 ${p.level === 1 ? '50%' : p.level === 2 ? '75%' : '100%'}` : '未布置'}
                     </p>
                   </div>
@@ -128,7 +128,7 @@ export default function MapPage() {
                     <button
                       onClick={() => handlePlace(p.id)}
                       disabled={budget < PLACEMENT_COST}
-                      className="text-xs px-3 py-1.5 rounded-md bg-wetland-sand/20 text-wetland-sand hover:bg-wetland-sand/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                      className="text-xs px-3 py-1.5 rounded-md bg-wetland-sand/25 text-wetland-sand hover:bg-wetland-sand/40 disabled:opacity-40 disabled:cursor-not-allowed transition-all font-semibold"
                     >
                       布置 ({PLACEMENT_COST})
                     </button>
@@ -137,14 +137,14 @@ export default function MapPage() {
                     <button
                       onClick={() => handleUpgrade(p.id)}
                       disabled={budget < upgradeCost}
-                      className="text-xs px-3 py-1.5 rounded-md bg-wetland-reed/20 text-wetland-reed hover:bg-wetland-reed/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center gap-1"
+                      className="text-xs px-3 py-1.5 rounded-md bg-wetland-reed/25 text-wetland-reed hover:bg-wetland-reed/40 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1 font-semibold"
                     >
                       <TrendingUp className="w-3 h-3" />
                       升级 ({upgradeCost})
                     </button>
                   )}
                   {p.placed && !upgradeCost && (
-                    <span className="text-xs text-wetland-sand/80 px-2 py-1">已满级 ✓</span>
+                    <span className="text-xs text-wetland-sand px-2 py-1 font-semibold">已满级 ✓</span>
                   )}
                 </div>
               </div>
@@ -165,7 +165,7 @@ export default function MapPage() {
         </div>
 
         {!canNextRound && (
-          <p className="text-center text-wetland-dusk text-sm mt-3">⚠️ 请先布置至少一个观测点</p>
+          <p className="text-center text-wetland-dusk text-sm mt-3 font-semibold">⚠️ 请先布置至少一个观测点</p>
         )}
       </div>
     </div>

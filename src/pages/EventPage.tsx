@@ -79,13 +79,13 @@ export default function EventPage() {
   };
 
   return (
-    <div className="min-h-screen wetland-bg paper-texture flex flex-col">
+    <div className="min-h-screen bg-wetland-deep wetland-bg paper-texture flex flex-col">
       <div className="sticky top-0 z-20 bg-wetland-deep/90 backdrop-blur-md border-b border-white/10 px-4 py-3">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <span className="text-white text-sm flex items-center gap-2">
             🔭 第 {round} 回合观测
           </span>
-          <span className="text-white/80 text-sm flex items-center gap-1">
+          <span className="text-white/90 text-sm flex items-center gap-1 font-medium">
             💰 {budget} · ⭐ {score}
           </span>
         </div>
@@ -99,7 +99,7 @@ export default function EventPage() {
                 <Eye className="w-5 h-5 text-wetland-sky" />
                 <h3 className="font-display text-lg text-white font-bold">观测事件</h3>
               </div>
-              <p className="text-white/85 text-sm mb-4">
+              <p className="text-white text-sm mb-4">
                 发现一只未知鸟类！观察线索后选择是否派出观测员获取更完整信息。
               </p>
 
@@ -107,7 +107,7 @@ export default function EventPage() {
                 <h4 className="text-wetland-sand text-sm font-semibold mb-2">鸟类线索</h4>
                 <div className="space-y-2">
                   {event.clues.map((clue, i) => (
-                    <div key={i} className="bg-wetland-dark/50 rounded-lg px-3 py-2 text-white/90 text-sm">
+                    <div key={i} className="bg-wetland-dark/70 rounded-lg px-3 py-2 text-white text-sm">
                       {clue}
                     </div>
                   ))}
@@ -143,7 +143,7 @@ export default function EventPage() {
                   ))}
                 </div>
                 {event.hiddenBands.length > 0 && (
-                  <p className="text-white/65 text-xs mt-3">
+                  <p className="text-white/60 text-xs mt-3">
                     还有 {event.hiddenBands.length} 个环志颜色未观测到
                   </p>
                 )}
@@ -161,7 +161,7 @@ export default function EventPage() {
                   </button>
                 )}
                 {observerSent && (
-                  <span className="text-wetland-sky text-sm flex items-center gap-1">
+                  <span className="text-wetland-sky text-sm flex items-center gap-1 font-semibold">
                     <CheckCircle2 className="w-4 h-4" />
                     已派出观测员，线索已补充
                   </span>
@@ -182,7 +182,7 @@ export default function EventPage() {
           <div className="animate-fadeInUp">
             <div className="card-game p-5 mb-4">
               <h3 className="font-display text-lg text-white font-bold mb-1">识别鸟类</h3>
-              <p className="text-white/75 text-sm mb-4">根据线索和环志颜色，选择你认为正确的鸟类</p>
+              <p className="text-white/90 text-sm mb-4">根据线索和环志颜色，选择你认为正确的鸟类</p>
 
               <div className="mb-4">
                 <p className="text-wetland-sand text-xs mb-3 font-semibold">环志组合参考</p>
@@ -207,8 +207,8 @@ export default function EventPage() {
                       onClick={() => setSelectedAnswer(option)}
                       className={`text-left p-4 rounded-xl border transition-all duration-200 ${
                         isSelected
-                          ? 'border-wetland-sand bg-wetland-sand/10 shadow-lg'
-                          : 'border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/8'
+                          ? 'border-wetland-sand bg-wetland-sand/15 shadow-lg'
+                          : 'border-white/25 bg-wetland-dark/60 hover:border-white/40 hover:bg-wetland-dark/80'
                       }`}
                     >
                       <div className="flex items-center gap-3">
@@ -218,7 +218,7 @@ export default function EventPage() {
                             {option}
                           </p>
                           {optBird && (
-                            <p className="text-xs text-white/60">{optBird.scientificName}</p>
+                            <p className="text-xs text-white/70">{optBird.scientificName}</p>
                           )}
                         </div>
                       </div>
@@ -272,13 +272,13 @@ export default function EventPage() {
               </div>
 
               {bird && (
-                <div className="bg-wetland-dark/50 rounded-lg p-4 text-center">
+                <div className="bg-wetland-dark/70 rounded-lg p-4 text-center">
                   <span className="text-4xl">{bird.emoji}</span>
                   <p className="text-white font-bold mt-2">{bird.name}</p>
-                  <p className="text-white/70 text-sm italic">{bird.scientificName}</p>
-                  <p className="text-white/85 text-sm mt-2">{bird.description}</p>
+                  <p className="text-white/75 text-sm italic">{bird.scientificName}</p>
+                  <p className="text-white text-sm mt-2">{bird.description}</p>
                   <div className="mt-3 flex items-center justify-center gap-3">
-                    <span className="text-white/70 text-xs">环志：</span>
+                    <span className="text-white/80 text-xs">环志：</span>
                     {bird.bandColors.map((c, i) => (
                       <div key={i} className="band-ring-sm" style={{ backgroundColor: BAND_COLOR_HEX[c] }}>
                         {c}
@@ -290,7 +290,7 @@ export default function EventPage() {
 
               <div className="mt-4">
                 <h4 className="text-wetland-sand text-sm font-semibold mb-2">推测迁徙路线（可选）</h4>
-                <p className="text-white/70 text-xs mb-3">
+                <p className="text-white/85 text-xs mb-3">
                   根据环志颜色含义推测这只鸟的迁徙路线，正确可额外获得 +15 分
                 </p>
                 <div className="space-y-2 mb-3">
@@ -300,10 +300,10 @@ export default function EventPage() {
                       <button
                         key={i}
                         onClick={() => setSelectedRoute(route)}
-                        className={`w-full text-left p-3 rounded-lg border transition-all text-sm ${
+                        className={`w-full text-left p-3 rounded-lg border transition-all text-sm font-medium ${
                           isSelected
-                            ? 'border-wetland-sand bg-wetland-sand/10 text-wetland-sand'
-                            : 'border-white/10 bg-white/5 text-white/70 hover:border-white/20'
+                            ? 'border-wetland-sand bg-wetland-sand/15 text-wetland-sand'
+                            : 'border-white/25 bg-wetland-dark/60 text-white/90 hover:border-white/40 hover:bg-wetland-dark/80'
                         }`}
                       >
                         {route}
@@ -346,9 +346,9 @@ export default function EventPage() {
                     <XCircle className="w-10 h-10 text-yellow-500 mx-auto mb-2" />
                     <h3 className="font-display text-xl text-white font-bold mb-1">路线推测未命中</h3>
                     {bird && (
-                      <p className="text-white/75 text-sm">正确路线：{bird.migrationRoute}</p>
+                      <p className="text-white/90 text-sm">正确路线：{bird.migrationRoute}</p>
                     )}
-                    <p className="text-white/65 text-sm mt-1">（{bird?.migrationStart} → {bird?.migrationEnd}）</p>
+                    <p className="text-white/75 text-sm mt-1">（{bird?.migrationStart} → {bird?.migrationEnd}）</p>
                   </>
                 )}
               </div>

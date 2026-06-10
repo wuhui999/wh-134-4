@@ -75,7 +75,7 @@ export default function StartPage() {
           </button>
         </div>
 
-        <div className="mt-12 flex items-center justify-center gap-6 text-white/60 text-sm">
+        <div className="mt-12 flex items-center justify-center gap-6 text-white/80 text-sm font-medium">
           <span className="flex items-center gap-1"><Map className="w-4 h-4" /> 策略布置</span>
           <span className="flex items-center gap-1">🎯 环志识别</span>
           <span className="flex items-center gap-1">🌍 路线推测</span>
