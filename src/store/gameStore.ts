@@ -29,6 +29,7 @@ export interface GameState {
   maxRounds: number;
   budget: number;
   score: number;
+  budgetBonus: number;
   observationPoints: ObservationPoint[];
   unlockedBirds: string[];
   eventHistory: EventRecord[];
@@ -52,6 +53,7 @@ export interface GameState {
   hasSave: () => boolean;
   clearSave: () => void;
   getMaxObservationLevel: () => number;
+  endGame: () => void;
 }
 
 const SAVE_KEY = 'wetland_bird_game_save';
@@ -77,6 +79,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   maxRounds: MAX_ROUNDS,
   budget: INITIAL_BUDGET,
   score: 0,
+  budgetBonus: 0,
   observationPoints: OBSERVATION_SLOTS.map(s => ({ ...s })),
   unlockedBirds: [],
   eventHistory: [],
@@ -93,6 +96,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       maxRounds: MAX_ROUNDS,
       budget: INITIAL_BUDGET,
       score: 0,
+      budgetBonus: 0,
       observationPoints: OBSERVATION_SLOTS.map(s => ({ ...s })),
       unlockedBirds: [],
       eventHistory: [],
@@ -112,6 +116,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       maxRounds: save.maxRounds ?? MAX_ROUNDS,
       budget: save.budget ?? INITIAL_BUDGET,
       score: save.score ?? 0,
+      budgetBonus: save.budgetBonus ?? 0,
       observationPoints: save.observationPoints ?? OBSERVATION_SLOTS.map(s => ({ ...s })),
       unlockedBirds: save.unlockedBirds ?? [],
       eventHistory: save.eventHistory ?? [],
@@ -157,8 +162,8 @@ export const useGameStore = create<GameState>((set, get) => ({
 
   nextRound: () => {
     const state = get();
-    if (state.round > state.maxRounds) {
-      set({ phase: 'result' });
+    if (state.round > state.maxRounds || state.budget <= 0) {
+      get().endGame();
       return;
     }
     const placedPoints = state.observationPoints.filter(p => p.placed);
@@ -262,8 +267,7 @@ export const useGameStore = create<GameState>((set, get) => ({
 
     const nextRound = state.round + 1;
     if (nextRound > state.maxRounds || state.budget <= 0) {
-      set({ phase: 'result' });
-      get().clearSave();
+      get().endGame();
       return false;
     }
 
@@ -279,6 +283,17 @@ export const useGameStore = create<GameState>((set, get) => ({
 
   goToPhase: (phase) => set({ phase }),
 
+  endGame: () => {
+    const state = get();
+    const budgetBonus = Math.floor(state.budget / 10) * 2;
+    set({
+      budgetBonus,
+      score: state.score + budgetBonus,
+      phase: 'result',
+    });
+    get().clearSave();
+  },
+
   saveGame: () => {
     const state = get();
     try {
@@ -287,6 +302,7 @@ export const useGameStore = create<GameState>((set, get) => ({
         maxRounds: state.maxRounds,
         budget: state.budget,
         score: state.score,
+        budgetBonus: state.budgetBonus,
         observationPoints: state.observationPoints,
         unlockedBirds: state.unlockedBirds,
         eventHistory: state.eventHistory,

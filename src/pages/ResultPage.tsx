@@ -4,7 +4,7 @@ import { Trophy, Target, Route, RotateCcw, BookOpen } from 'lucide-react';
 import { BIRDS } from '@/data/birds';
 
 export default function ResultPage() {
-  const { score, eventHistory, budget, unlockedBirds, newGame } = useGameStore();
+  const { score, eventHistory, budget, budgetBonus, unlockedBirds, newGame } = useGameStore();
   const navigate = useNavigate();
 
   const totalEvents = eventHistory.length;
@@ -13,8 +13,7 @@ export default function ResultPage() {
   const routeGuesses = eventHistory.filter(e => e.routeGuessed).length;
   const accuracy = totalEvents > 0 ? Math.round((correctAnswers / totalEvents) * 100) : 0;
   const routeAccuracy = routeGuesses > 0 ? Math.round((correctRoutes / routeGuesses) * 100) : 0;
-  const budgetBonus = Math.floor(budget / 10) * 2;
-  const totalScore = score + budgetBonus;
+  const totalScore = score;
 
   const getGrade = () => {
     if (totalScore >= 150) return { grade: 'S', color: 'text-wetland-sand', label: '传奇观测家' };
